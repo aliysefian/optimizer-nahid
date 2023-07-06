@@ -17,15 +17,15 @@ class ComputeTraffic:
         self.CF = 2110
         self.noise_sigma = -104
         self.d = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-        self.lamda_value=299_792_458/self.CF
+        self.lamda_value = 299_792_458 / self.CF
         pass
 
-    def g(self, x):
+    def g(self, d):
         g = 10 * math.log10((self.lamda_value ** 2) / (4 * math.pi * d ** 2))
         return g
 
-    def calculate_SNR(self, x, P, g):
-        snr = (self.P * g(x)) / self.noise_sigma ** 2
+    def calculate_SNR(self, x):
+        snr = (self.P * self.g(x)) / self.noise_sigma ** 2
         return snr
 
     def calculate_cj(self, x):
@@ -36,7 +36,7 @@ class ComputeTraffic:
         """
         p = 2  # to be calculated
         sigma = 1
-        cj = self.BWj * math.log2(1 + self.calculate_SNR(x, P, g, sigma))
+        cj = self.BWj * math.log2(1 + self.calculate_SNR(x))
         return cj
 
     def calculate_ej(self, x):
@@ -57,6 +57,7 @@ class ComputeTraffic:
 
 
 def estimate_Lm(j):
+    input_A = [2000, 3000, 1500]
     pass
 
 
