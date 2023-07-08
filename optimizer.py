@@ -7,7 +7,7 @@ bj = np.zeros(10)
 
 
 class ComputeTraffic:
-    def __init__(self):
+    def __init__(self, A):
         self.fl = 0.5
         self.l = 0.05
         self.v = 5000
@@ -16,7 +16,8 @@ class ComputeTraffic:
         self.BWj = 10
         self.CF = 2110
         self.noise_sigma = -104
-        self.d = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+        # self.d = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+        self.A = A
         self.lamda_value = 299_792_458 / self.CF
         pass
 
@@ -39,12 +40,12 @@ class ComputeTraffic:
         cj = self.BWj * math.log2(1 + self.calculate_SNR(x))
         return cj
 
-    def calculate_ej(self, x):
+    def calculate_ej(self, x, bj):
         """
         :param x:
         :return:
         """
-        ej = (fl(x) * l(x) * bj(x)) / self.calculate_cj(x)
+        ej = (self.fl * self.l * bj) / self.calculate_cj(x)
         return ej
 
     def calculate_TLj(self, x):
@@ -54,6 +55,7 @@ class ComputeTraffic:
         """
         TLj = np.sum(self.calculate_ej(x))
         return TLj
+
 
 
 def estimate_Lm(j):
@@ -108,5 +110,5 @@ def find_device_fog_mapping(D, J):
 D = [...]  # Set of IoT Devices
 J = [...]  # Set of Fog Nodes
 
-node_mapping = find_device_fog_mapping(D, J)
-print(node_mapping)
+# node_mapping = find_device_fog_mapping(D, J)
+# print(node_mapping)
