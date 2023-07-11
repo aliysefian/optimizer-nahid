@@ -22,7 +22,7 @@ class ComputeTraffic:
         pass
 
     def g(self, d):
-        g = 10 * math.log10((self.lamda_value ** 2) / (4 * math.pi * d ** 2))
+        g = 10 * math.log10((self.lamda_value ** 2) / (4 * math.pi * d) ** 2)
         return g
 
     def calculate_SNR(self, x):
@@ -37,7 +37,7 @@ class ComputeTraffic:
         """
         p = 2  # to be calculated
         sigma = 1
-        cj = self.BWj * math.log2(1 + self.calculate_SNR(x))
+        cj = self.BWj * math.log10(1 + self.calculate_SNR(x))
         return cj
 
     def calculate_ej(self, x, bj):
