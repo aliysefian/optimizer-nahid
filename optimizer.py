@@ -57,6 +57,37 @@ class ComputeTraffic:
         return TLj
 
 
+class ComputeLoad:
+    def __init__(self, A):
+        self.fl = 0.5
+        self.l = 0.05
+        self.v = 5000
+        self.P = 100
+        self.C = 7 * 10 ** 6
+        self.BWj = 10
+        self.CF = 2110
+        self.noise_sigma = -104
+        # self.d = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+        self.A = A
+        self.lamda_value = 299_792_458 / self.CF
+        pass
+
+    def calculate_ej(self, load, bj, Cj):
+        """
+        :param x:
+        :return:
+        """
+        ej = (self.fl * load * bj) / Cj
+        return ej
+
+    def calculate_CLj(self, x):
+        """
+        :param x:
+        :return:
+        """
+        CLj = np.sum(self.calculate_ej(x))
+        return CLj
+
 
 def estimate_Lm(j):
     input_A = [2000, 3000, 1500]
