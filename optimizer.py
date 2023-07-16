@@ -89,57 +89,50 @@ class ComputeLoad:
         return CLj
 
 
-def estimate_Lm(j):
-    input_A = [2000, 3000, 1500]
-    pass
+# def estimate_Lm(j):
+#     input_A = [2000, 3000, 1500]
+#     pass
 
 
 # Function to estimate Lm(j)
 # ...
-
-def estimate_Lp(j):
-    pass
-
-
-# Function to estimate Lp(j)
-# ...
-
-def disInCoverageAreaOf(j):
-    pass
-
+#
+# def estimate_Lp(j):
+#     pass
+#
+#
+# # Function to estimate Lp(j)
+# # ...
+#
+# def disInCoverageAreaOf(j):
+#     pass
+#
 
 # Function to check if d is in the coverage area of j
 # ...
 
-def find_device_fog_mapping(D, J):
-    NodeMap = []
+# def find_device_fog_mapping(D, J):
+#     NodeMap = []
+#
+#     while True:
+#         for d in D:
+#             min_cost = float('inf')
+#             min_node = None
+#             for j in J:
+#                 if disInCoverageAreaOf(j):
+#                     Lm_j = estimate_Lm(j)
+#                     Lp_j = estimate_Lp(j)
+#                     cost = Lm_j + Lp_j
+#                     if cost < min_cost:
+#                         min_cost = cost
+#                         min_node = j
+#             NodeMap.append((d, min_node))
+#
+#         L = []
+#         for j in J:
+#             L.append(estimate_Lm(j) + estimate_Lp(j))
+#         if sum(L) == min(L):
+#             break
+#
+#     return NodeMap
 
-    while True:
-        for d in D:
-            min_cost = float('inf')
-            min_node = None
-            for j in J:
-                if disInCoverageAreaOf(j):
-                    Lm_j = estimate_Lm(j)
-                    Lp_j = estimate_Lp(j)
-                    cost = Lm_j + Lp_j
-                    if cost < min_cost:
-                        min_cost = cost
-                        min_node = j
-            NodeMap.append((d, min_node))
-
-        L = []
-        for j in J:
-            L.append(estimate_Lm(j) + estimate_Lp(j))
-        if sum(L) == min(L):
-            break
-
-    return NodeMap
-
-
-# Example usage
-D = [...]  # Set of IoT Devices
-J = [...]  # Set of Fog Nodes
-
-# node_mapping = find_device_fog_mapping(D, J)
-# print(node_mapping)
