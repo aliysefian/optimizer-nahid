@@ -5,6 +5,7 @@ from typing import Optional
 from base import minimize_TLj
 import sys
 import aioredis
+from fastapi.encoders import jsonable_encoder
 
 app = FastAPI()
 
@@ -29,6 +30,7 @@ class PersonSensor(BaseModel):
     heart_sensor: dict = None
     temperature_sensor: dict = None
     blood_pressure_sensor: dict = None
+    time: str= None
 
 
 @app.get("/")
@@ -73,4 +75,5 @@ async def calculate(item: PersonSensor):
     ss = json.dumps(load_of_each_server)
     await redis.set("load_of_each_server", ss, ex=30)
     print({"message": load_of_each_server, "min_com": min_combination})
-    return {"message": min_TLj, "min_com": min_combination}
+    data=jsonable_encoder(item)
+    return {"message": min_TLj, "min_com": str(min_pos),"data": data}
