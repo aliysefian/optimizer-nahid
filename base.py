@@ -1,11 +1,16 @@
 import itertools
 import numpy as np
 from optimizer import ComputeTraffic, ComputeLoad
+import queue
+
+pq = queue.PriorityQueue()
+
 
 
 def minimize_TLj(A, l, cj):
     # Generate all possible combinations of bj values
     combinations = list(itertools.product([0, 1], repeat=len(A)))
+    cost=[]
     print(combinations)
     min_TLj = float('inf')
     min_combination = None
@@ -41,11 +46,12 @@ def minimize_TLj(A, l, cj):
             test.append(result)
 
         # Update minimum TLj if a smaller value is found
+        cost.append(min_TLj)
         if result < min_TLj:
             min_TLj = result
             min_combination = combination
 
-    return min_TLj, min_combination
+    return min_TLj, min_combination,cost
 
 
 def minimize_CLj(A, l, cj):
@@ -87,9 +93,9 @@ capacity_of_each_server = [10, 15, 40]
 # l = lambda x: x ** 3  # Example function for l
 # cj = lambda x: x ** 2 + 1  # Example function for cj
 
-min_TLj, min_combination = minimize_TLj(A, load_of_each_server, capacity_of_each_server)
-print("Minimum TLj:", min_TLj)
-print("Optimal combination of bj:", min_combination)
+# min_TLj, min_combination ,cost= minimize_TLj(A, load_of_each_server, capacity_of_each_server)
+# print("Minimum TLj:", min_TLj)
+# print("Optimal combination of bj:", min_combination)
 # arg = np.argmin(min_combination)
 # print(f" minimu BS {A[arg - 1]}")
 # print(f" minimu LM {min_Lj}")
