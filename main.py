@@ -59,10 +59,10 @@ async def calculate(item: PersonSensor):
 
     load_of_each_server = await redis.get("load_of_each_server")
     if load_of_each_server is None:
-        load_of_each_server = [0, 10, 20]
+        load_of_each_server = [0, 0, 0]
     else:
         load_of_each_server = json.loads(load_of_each_server)
-    capacity_of_each_server = [50, 150, 100]
+    capacity_of_each_server = [150, 150, 200]
     is_queue_call = compare_lists(capacity_of_each_server, load_of_each_server)
     proccess_data = None
     if is_queue_call:
@@ -97,7 +97,7 @@ async def calculate(item: PersonSensor):
 
     load_server = json.dumps(load_of_each_server)
 
-    await redis.set("load_of_each_server", load_server, ex=30)
+    await redis.set("load_of_each_server", load_server, ex=15)
     # pq.put
 
     print({"message": load_of_each_server, "min_com": min_combination})

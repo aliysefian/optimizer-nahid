@@ -30,7 +30,6 @@ while True:
                 print("write in cloud")
                 dt = json.loads(dt)
                 connect_db_insert_sensor_data(dt)
-    # time.sleep(1)
 
 # if retrieved_value:
 #     decoded_value = retrieved_value.decode('utf-8')
